@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="/media/styles.css" />
+		<script src="/media/jquery-1.4.4.min.js" type="text/javascript"></script>
+		<script>
+			$(document).ready(function(){
+				
+				$('form').submit(function() {
+					
+					var a = $("li[class*='titleQuiz']").size();
+					var b = $("input:checked").size();
+					
+					if (a > b){
+  						alert("안푼문제있음. 다 풀것");
+  						return false;
+  					}
+  					
+				});
+			});
+		</script>
+	</head>
+	

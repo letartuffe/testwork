@@ -1,0 +1,127 @@
+{% load highlight %}
+{% include 'layout/header.html' %}
+	<body >
+		<header>
+			<hgroup>
+				<h1>Company Name</h1>
+				<h2>An example of HTML5 and CSS3 in action</h2>
+			</hgroup>
+		</header>
+
+		<nav>
+			<ul>
+				<li><a href="#">Home</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact Us</a></li>
+			</ul> 
+		</nav>
+
+		<article>
+			<header>
+				<time datetime="2010-01-12" pubdate>
+					<span>Jan</span> 12
+				</time>
+				<h1>
+					<a href="#" title="Link to this post" rel="bookmark">Article Heading</a>
+				</h1>
+			</header>
+			<p>article </p>
+
+			<section>
+				<header>
+				{% if mode == 'score' %}
+					<h1>문제풀이 {{1|countQuiz:num}}  </h1>
+				{% else %}
+					<h1>문제풀이</h1>
+				{% endif %}
+				</header>
+				<p>
+				 {% comment %} 리스트페이지인지 결과 페이지 인지 {% endcomment %}
+				{% if mode == 'score' %}
+
+					<ol>
+
+					{% for quizListNormalValue in quizResultListNormal %}
+					<p>
+						<li class='titleQuiz{{quizListNormalValue.id}}'>{{quizListNormalValue.titleQuiz}}</li>
+					 	{% if quizListNormalValue.textQuiz%}
+								<ul>
+								<li class='textQuiz'>	
+								{%if quizListNormalValue.case.id == 3 %}
+								
+		
+									<div class='textQuizInner'>{{quizListNormalValue.textQuiz|highlight:quizListNormalValue.allAnswer}}</div>
+				
+			
+								{%else%}
+									<div class='textQuizInner'>{{quizListNormalValue.textQuiz}}</div>
+									
+								
+								{% endif %}
+								</ul>
+								{% endif %}
+						<!--{{quizListNormalValue.cTime}} -->
+							<ol>
+								<li {{1|checkedF:quizListNormalValue.scoreAnswer}}>{{quizListNormalValue.firstAnswer}}
+								<li {{2|checkedF:quizListNormalValue.scoreAnswer}}>{{quizListNormalValue.secondAnswer}}
+								<li {{3|checkedF:quizListNormalValue.scoreAnswer}}>{{quizListNormalValue.thirdAnswer}}
+								<li {{4|checkedF:quizListNormalValue.scoreAnswer}}>{{quizListNormalValue.fourthAnswer}}
+								{% if quizListNormalValue.fifthAnswer%}
+								<li {{5|checkedF:quizListNormalValue.scoreAnswer}}>{{quizListNormalValue.fifthAnswer}}
+								{% endif %}
+								<!-- <input type=hidden name="{{quizListNormalValue.id}}_h" id="answer{{forloop.counter}}_h" value="{{quizListNormalValue.answerQuiz}}"> -->
+							</ol>
+							<p>
+				    		{{quizListNormalValue.solutionQuiz|linebreaks}}
+				    		</p>
+						{% endfor %}
+							</p>		
+						</ol>
+
+{% comment %}------------------------------------------------------------------------------------------{% endcomment %}
+				{% else %}
+				<form id='target' action="/quiz/scoring" method="post">
+				{% csrf_token %}
+					<ol>
+				{% for quizListNormalValue in a %}
+
+						<li class='titleQuiz{{quizListNormalValue.id}}'>{{quizListNormalValue.titleQuiz}}</li>
+					{% if quizListNormalValue.textQuiz%}
+						<ul>
+							<li> 
+		
+							{%if quizListNormalValue.case.id == 3 %}
+								{{quizListNormalValue.textQuiz|highlight:quizListNormalValue.allAnswer}}
+							{%else%}
+								{{quizListNormalValue.textQuiz}}
+							{% endif %}
+						</ul>
+					{% endif %}
+				
+						<ol>
+							<li><input type=radio name="{{quizListNormalValue.id}}" id="answer{{forloop.counter}}" value="1">{{quizListNormalValue.firstAnswer}}
+							<li><input type=radio name="{{quizListNormalValue.id}}" id="answer{{forloop.counter}}" value="2">{{quizListNormalValue.secondAnswer}}
+							<li><input type=radio name="{{quizListNormalValue.id}}" id="answer{{forloop.counter}}" value="3">{{quizListNormalValue.thirdAnswer}}
+							<li><input type=radio name="{{quizListNormalValue.id}}" id="answer{{forloop.counter}}" value="4">{{quizListNormalValue.fourthAnswer}}
+							{% if quizListNormalValue.fifthAnswer%}
+							<li><input type=radio name="{{quizListNormalValue.id}}" id="answer{{forloop.counter}}" value="5">{{quizListNormalValue.fifthAnswer}}
+							{% endif %}
+							<!-- <input type=hidden name="{{quizListNormalValue.id}}_h" id="answer{{forloop.counter}}_h" value="{{quizListNormalValue.answerQuiz}}"> -->
+						</ol>
+				{% endfor %}		
+					</ol>
+					<input type="submit" value="제출">
+				</form>
+				
+				</p>
+			
+			
+			{% endif %}
+			</section>
+	</article>
+
+
+
+{% include 'layout/footer.html' %}
+
+
