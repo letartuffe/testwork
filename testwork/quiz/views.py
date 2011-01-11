@@ -78,3 +78,8 @@ def scoring(request):
             if scoringSource[k] == quizzes.objects.values('answerQuiz').get(id = k).values()[0]:
                 rightCheck.append(k)
         '''
+def testhtml(request):
+    a = ''
+    return render_to_response('testhtml.html', {"a": a, }, context_instance = RequestContext(request))
+    
+    

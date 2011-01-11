@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<title></title>
 		<link rel="stylesheet" href="/media/styles.css" />
+		
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
   		<script type="text/javascript" src="http://dev.jquery.com/view/trunk/plugins/validate/jquery.validate.js"></script>
   	
@@ -11,24 +12,9 @@
 			$(document).ready(function(){
 			    
 				
-				$("form").validate({
+				$('form').validate({
     				debug: true
-     				var n = $("input:unchecked").length;
-     				alert(n);
-     				rules: {
-       					name: "required",
-       					email: {
-         					required: true,
-         					email: true
-       					}
-            		},
-     				messages: {
-       					name: "Please specify your name",
-       					email: {
-         					required: "We need your email address to contact you",
-         					email: "Your email address must be in the format of name@domain.com"
-       					}
-     				}
+     				
 				});  
 				
 				$('form').submit(function() {

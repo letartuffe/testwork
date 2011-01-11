@@ -16,7 +16,8 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
+    
+    (r'^quiz/test$', 'testwork.quiz.views.testhtml'),
     (r'^quiz/list$', 'testwork.quiz.views.quizList'),
     (r'^quiz/scoring$', 'testwork.quiz.views.scoring'),
     # Uncomment the next line to enable the admin:
