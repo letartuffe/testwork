@@ -71,7 +71,7 @@ def scoring(request):
         num.append(rightCheck)
         num.append(num[0] - num[1])
         mode = 'score'
-        return render_to_response('testmode.html', {"quizResultListNormal": quizResultListNormal, "mode":mode, "num":num, "scoringSource":scoringSource, }, context_instance = RequestContext(request))
+        return render_to_response('list.html', {"quizResultListNormal": quizResultListNormal, "mode":mode, "num":num, "scoringSource":scoringSource, }, context_instance = RequestContext(request))
 
         '''
         for k in scoringSource:
