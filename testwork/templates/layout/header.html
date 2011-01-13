@@ -12,13 +12,21 @@
 				var n = $("input:unchecked").length;
 				alert(n);
 				$('form').validate({
-    				debug: true ,
+    				debug: false ,
     				rules:{
     					radio: "required"
     				},
     				messages: {
       					 radio: "Please specify your name",
-					}
+					},
+					submitHandler: function(form) {  
+					//유효성 검사에서 성공하였을 경우 호출되는 함수. 인자로 submit할 form이 전달된다.
+						form.submit();
+					},
+					errorPlacement: function(error, element) { 
+					//유효성 검사에서 에러가 발생된 컨트롤들마다 해당 함수를 거친다. (4개 텍스트 박스가 에러라면 해당 함수 4번 호출)
+						error.insertAfter(element);  //에러가 발생한 코드의 앞부분에 messages에서 정의한 텍스트를 출력함
+					} 
     				
 				});  
 				
