@@ -24,8 +24,8 @@ def underline(a):
     return a
 
 def quizList(request):
-    #a = underline(get_list_or_404(quizzes, is_public = True))
-    a = underline(get_list_or_404(quizzes.objects.filter(id__in = [6, 7, 8]), is_public = True))
+    a = underline(get_list_or_404(quizzes, is_public = True))
+    #a = underline(get_list_or_404(quizzes.objects.filter(id__in = [6, 7, 8]), is_public = True))
     return render_to_response('list.html', {"a": a, }, context_instance = RequestContext(request))
 
 

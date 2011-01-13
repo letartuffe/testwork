@@ -18,7 +18,9 @@
 	border:1px dotted
 }
 
-
+.error{
+	color:red
+}
 body {
 	width: 800px;
 	margin: 0px auto;

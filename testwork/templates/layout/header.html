@@ -12,13 +12,28 @@
 				var n = $("input:unchecked").length;
 				alert(n);
 				$('form').validate({
+					
     				debug: false ,
     				rules:{
-    					raido : "required"
+    					{% for b in a %}
+    					{{b.id}} : "required",
+    					{% endfor %}
     				},
     				messages: {
-      					 radio: "Please specify your name",
-					}    			
+    					{% for b in a %}
+    					{{b.id}} : "{{forloop.counter}}번 문제를 안풀었어요. 모든 문제를 풀어야 넘어가요",
+    					{% endfor %}
+    					
+    				},
+    				onkeyup:false,
+onclick:false,
+onfocusout:false,
+showErrors:function(errorMap, errorList){
+alert(errorList[0].message);
+}   			
+    				
+    				
+    				
 				});  
 				
 
